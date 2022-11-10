@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            *{
+                font-family: sans-serif;
+            }
+            #napovidatko ul{
+                list-style: None;
+                background-color: darkblue;
+                color: white;
+                margin: 0;
+                padding: 0 10px;
+                display: block;
+            }
+            #napovidatko {
+                width: 250px;
+            }
+            #napovidatko input{
+                width: 100%;
+            }
+            #napovidatko input
+            #napovidatko ul li:hover{
+                color: black;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="testik.html" method="get" id="nasFormular">
+            <div id="napovidatko">
+                <input type="password" name="fisrt-name">
+                <ul>
+                    <li>asd</li>
+                    <li>azxc</li>
+                    <li>qwe</li>
+                </ul>
+
+            </div>
+        </form>
+    </body>
+
+    <script>
+        const input = document.querySelector("#napovidatko input");
+        input.addEventListener("keydown", nactiMoznosti);
+
+        function nactiMoznosti(){
+            const toCoUzNapsano = document.querySelector("#napovidatko toCoUzNapsano");
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if(this.readyState == '4' && this.status == 200) {
+                    zpracujVysledky(this.responseText);
+                }
+            }
+            request.open("get", "naseMoznosti.php?coUznapsal="+toCoUzNapsano);
+            request.send("");
+        }
+
+        function zpracujVysledky(responseText){
+            const rozpracovano = JSON.parse(responseText);
+            const moznostiUl = document.querySelector("#napovidatko ul");
+
+            moznostiUl.innerHTML = "";
+            for (const prisloZeServeru of rozpracovano) {
+                const naseMoznost = document.createElement("li");
+                 naseMoznost.innerText = prisloZeServeru;
+                 naseMoznost.addEventListener("click", moznostVybrana);
+                 moznostiUl.appendChild(naseMoznost);
+                       
+            }
+        }
+        function moznostVybrana(event) {
+            const naC
+        }
+    </script>
+</html>
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <form action="testik.html" method="get" id="nasFormular">
+            <label>
+                Napis svoje jmeno
+                <input type="text" name="first-name">
+            </label>
+            <div id="errorDiv">
+
+            </div>
+            <label>
+                Napis svoje prijmeni
+                <input type="text" name="second-name">
+            </label>
+
+            <button type="submit">Odesli to tam</button>
+        </form>
+    </body>
+
+    <script>
+        let a = 1;
+        var b = 1;
+        const c = 1;
+
+    
+        const nasFormular = document.getElementsById("nasFormular");
+        nasFormular.addEventListener("blur", zkontrolujPrvniJmeno);
+
+        const nasInputDiv = document.querySelector("#nasFormular input[name=errorDiv")
+
+        function zkontrolujPrvniJmeno(){
+            const nasInput = document.querySelector("#nasFormular input[name=first-name")
+            if (nasInput.value === "marlin") 
+                return true;
+            
+           const errorDiv = document.getElementById("errorDiv")
+            errorDiv.innerHTML += "Mas ro spatne </br>"
+        }
+        function zkontrolujNamFormular(event) {
+            if (!zkontrolujPrvniJmeno()) {
+                event.preventDefault();
+                event.stopPropagovat();
+            }
+        }
+    </script>
+</html>-->
